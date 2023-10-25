@@ -1,0 +1,17 @@
+### Teste com Flask em modo debug
+
+POST http://127.0.0.1:5000/predizer_categoria HTTP/1.1
+Content-Type: application/json
+
+{
+    "descricao": "Kit 4 Esponjas Maquiagem Formato de Coração"
+}
+
+### Teste com nginx na frente
+
+POST http://127.0.0.1/api/predizer_categoria HTTP/1.1
+Content-Type: application/json
+
+{
+    "descricao": "Kit 4 Esponjas Maquiagem Formato de Coração"
+}

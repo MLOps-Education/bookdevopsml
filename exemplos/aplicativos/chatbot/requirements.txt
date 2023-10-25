@@ -1,0 +1,4 @@
+# Tested on Python 3.6.8
+ChatterBot==1.0.4
+pytz==2021.3
+kafka-python==2.0.2

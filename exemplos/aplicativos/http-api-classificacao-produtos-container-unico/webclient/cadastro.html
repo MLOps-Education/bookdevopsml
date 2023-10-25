@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Meu e-commerce</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Olá, Vendedor</a></li>
+                <li><a href="#"><i class="material-icons">exit_to_app</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form>
+            <div class="section no-pad-bot" id="index-banner">
+                <div class="container">
+                    <br><br>
+                    <h3 class="header center">Cadastro de produto</h3>
+                    <br><br>
+
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="input-field">
+                    <input placeholder="Título" id="titulo" type="text" class="validate">
+                    <label for="titulo">Título</label>
+                </div>
+                <div class="input-field">
+                    <textarea placeholder="Descrição" id="descricao" class="materialize-textarea" onfocusout="buscarCategoria()"></textarea>
+                    <label for=" descricao ">Descrição</label>
+                </div>
+                <div class="input-field ">
+                    <input placeholder="Categoria" id="categoria" type="text" class="validate">
+                    <label for="categoria ">Categoria</label>
+                </div>
+            </div>
+            <div class="container ">
+                <button class="btn waves-effect waves-light " type="submit " name="action ">Enviar
+                    <i class="material-icons right ">send</i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js "></script>
+    <script>
+        function buscarCategoria() {
+            // Primeiro vamos construir um objeto JSON para enviar para a API
+            // O objeto tem um campo "descricao", cujo conteúdo vem do formulário,
+            // sendo obtido do "input" cujo "id" é "descricao" (procure-o no HTML)
+            let data = {
+                "descricao": document.getElementById("descricao").value
+            };
+
+            // Em seguida, vamos enviar uma requisição
+            // Note como o endereço aponta para o servidor local
+            fetch("http://127.0.0.1:8080/api/predizer_categoria", {
+                // Vamos usar método POST
+                method: "POST",
+                // Estamos enviando um JSON
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // Aqui vai o conteúdo, que é o objeto JSON convertido para
+                // string (lembre-se, um HTTP Request é uma string)
+                body: JSON.stringify(data)
+            }).then(res => {
+                // Essa função "then" é chamada assim que o serviço responder
+                res.json().then(function(json) {
+                    // Vamos converter o resultado para JSON e salvar
+                    // a categoria no formulário, no "input" cujo "id" é "categoria"
+                    document.getElementById("categoria").value = json.categoria;
+
+                    // E pronto!
+                })
+            });
+        }
+    </script>
+</body>
+
+</html>
